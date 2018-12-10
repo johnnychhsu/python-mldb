@@ -7,9 +7,13 @@
 
 class QueryHandler(object):
 
-    def __init__(self, cursor):
+    def __init__(self, connector, cursor):
+        self.connector = connector
         self.cursor = cursor
 
     def run_query(self, query):
+        pass
+
+    def _error_handler(self):
         pass
 

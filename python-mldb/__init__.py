@@ -16,6 +16,11 @@ class Connector(object):
         self.password = password
         self.mydb = None
         self.cursor = None
+        self.db_list = []
+
+    def __del__(self):
+        self.cursor.close()
+        self.mydb.close()
 
     def connect(self):
         try:
@@ -35,13 +40,12 @@ class Connector(object):
             else:
                 print(err)
 
-    def run_query(self, query):
-        pass
-
     def show_database(self):
         pass
 
+    def choose_database(self, db_name):
 
+        self.mydb.database = db_name
 
 
 

@@ -7,16 +7,21 @@
 
 class Procedure(object):
 
-    def __init__(self, connector, dataset):
-        self.connector = connector
-        self.cursor = connector.cursor()
+    def __init__(self, query_handler, dataset):
+        self.query_handler = query_handler
         self.dataset = dataset
+        self.model_list = []
 
-    def show_model(self):
+    def show_progress(self):
         pass
 
-    def train(self, model_name):
+    def train(self, model_name, model_type):
         pass
 
-    def import_raw(self):
-        pass
+
+class ClassifierProcedure(Procedure):
+
+    def __init__(self):
+        super(ClassifierProcedure, self).__init__(Procedure)
+
+

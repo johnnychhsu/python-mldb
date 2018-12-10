@@ -7,13 +7,15 @@
 
 class Dataset(object):
 
-    def __init__(self, connector):
-        self.connector = connector
-        self.cursor = connector.cursor()
+    def __init__(self, query_handler):
+        self.query_handler = query_handler
 
-    def save_to_database(self, name):
+    def save_to_database(self, ):
         pass
 
     def load_from_database(self, name):
+        pass
+
+    def get_data(self):
         pass
 

@@ -7,9 +7,8 @@
 
 class Function(object):
 
-    def __init__(self, connector, dataset):
-        self.connector = connector
-        self.cursor = connector.cursor()
+    def __init__(self, query_handler, dataset):
+        self.query_handler = query_handler
         self.dataset = dataset
 
     def show_model(self):
@@ -18,5 +17,8 @@ class Function(object):
     def reference(self, model_name, model_type):
         pass
 
-    def classifier(self):
-        pass
+
+class ClassifierFunction(object):
+
+    def __init__(self):
+        super(ClassifierFunction, self).__init__(Function)
