@@ -1,7 +1,7 @@
 # @Author: Johnny Hsu
 # @Date: 2018-12-09
 # @Last Modified by:   Johnny Hsu
-# @Last Modified time: 2018-12-09
+# @Last Modified time: 2018-12-11
 # @File Name:          query_handler.py
 
 
@@ -18,9 +18,6 @@ class QueryHandler(object):
             self._error_handler(err)
         else:
             print ("Query Done.")
-
-    def commit_query(self):
-        self.cursor.commit()
 
     @staticmethod
     def _error_handler(err):

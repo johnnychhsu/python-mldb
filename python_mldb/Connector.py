@@ -34,6 +34,7 @@ class Connector(object):
                 passwd=self.password,
                 auth_plugin='mysql_native_password'
             )
+            self.mydb.autocommit = True
 
             self.cursor = self.mydb.cursor()
 
