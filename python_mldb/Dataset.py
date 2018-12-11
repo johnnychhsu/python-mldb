@@ -7,11 +7,11 @@ Created on Tue Dec 11 17:07:13 2018
 """
 import pandas as pd
 
+
 class Dataset(object):
     def __init__(self, query_handler):
         self.query_handler = query_handler
         
-
     def save_to_database(self, csv_file, table_name):
         data = pd.read_csv(csv_file, nrows = 2)
         col_name = []
