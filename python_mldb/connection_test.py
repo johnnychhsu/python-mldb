@@ -11,8 +11,11 @@ with open("config_file/config.yaml", 'r') as stream:
 
 
 connector = Connector(config['password'])
-connector.connect()
+flag = connector.connect()
 
-print ("Pass Test!")
+if flag:
+    print ("Test Pass!")
+else:
+    print ("Test Fail")
 
 
