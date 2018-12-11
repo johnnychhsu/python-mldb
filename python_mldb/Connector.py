@@ -52,6 +52,3 @@ class Connector(object):
             else:
                 print(err)
 
-
-
-
