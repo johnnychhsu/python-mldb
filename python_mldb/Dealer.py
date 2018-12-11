@@ -17,7 +17,7 @@ class Dealer(object):
 
         config = _load_config()
         host = config['host']
-        user = config['user']
+        user = config['name']
         password = config['password']
 
         self.connector = Connector(user=user,
@@ -25,10 +25,15 @@ class Dealer(object):
                                    password=password)
 
         self.connector.connect()
+        self.query_handler = QueryHandler(self.connector.mydb, self.connector.cursor)
+        self._create_database(config['database'])
 
-        self.query_handler = QueryHandler(self.connector, self.connector.cursor)
         self.dataset = Dataset(self.query_handler)
         self.procedure = Procedure(self.query_handler, self.dataset)
         self.function = Function(self.query_handler, self.dataset)
 
         print ("Dealer established, service start!")
+
+    def _create_database(self, name):
+        query = "CREATE DATABASE {}".format(name)
+        self.query_handler.run_query(query)
