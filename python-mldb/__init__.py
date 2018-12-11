@@ -40,12 +40,6 @@ class Connector(object):
             else:
                 print(err)
 
-    def show_database(self):
-        pass
-
-    def choose_database(self, db_name):
-
-        self.mydb.database = db_name
 
 
 

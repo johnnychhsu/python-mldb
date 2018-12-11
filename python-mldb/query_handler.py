@@ -14,6 +14,6 @@ class QueryHandler(object):
     def run_query(self, query):
         pass
 
-    def _error_handler(self):
+    def _error_handler(self, err):
         pass
 
