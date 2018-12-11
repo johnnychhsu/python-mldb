@@ -1,4 +1,5 @@
 .idea/
 .ipynb_checkpoints
 data/
-config_file/*
+*.pyc
+__pycache__/

@@ -19,18 +19,25 @@ class Connector(object):
         self.db_list = []
 
     def __del__(self):
-        self.cursor.close()
-        self.mydb.close()
+        if self.mydb:
+            self.mydb.close()
+        if self.cursor:
+            self.cursor.close()
+
+        print ("Connection finished.")
 
     def connect(self):
         try:
             self.mydb = mysql.connector.connect(
                 host=self.host,
                 user=self.user,
-                passwd=self.password
+                passwd=self.password,
+                auth_plugin='mysql_native_password'
             )
 
             self.cursor = self.mydb.cursor()
+
+            print ("Connection established.")
 
         except mysql.connector.Error as err:
             if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
