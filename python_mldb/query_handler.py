@@ -17,7 +17,7 @@ class QueryHandler(object):
         except mysql.connector.Error as err:
             self._error_handler(err)
         else:
-            print ("Query Done.")
+            print ("Query: {} done.".format(query))
 
     @staticmethod
     def _error_handler(err):
