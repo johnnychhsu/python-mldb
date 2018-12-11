@@ -1,21 +1,22 @@
-import yaml
-
 from Connector import Connector
+from utils import _load_config
 
 
-with open("config_file/config.yaml", 'r') as stream:
-    try:
-        config = yaml.load(stream)
-    except yaml.YAMLError as err:
-        print (err)
+def test_connector():
+    config = _load_config()
+
+    connector = Connector(config['password'])
+    flag = connector.connect()
+
+    if flag:
+        print ("Connector Test Pass!")
+    else:
+        print ("Connector Test Fail")
 
 
-connector = Connector(config['password'])
-flag = connector.connect()
-
-if flag:
-    print ("Test Pass!")
-else:
-    print ("Test Fail")
+def run_test():
+    test_connector()
 
 
+if __name__ == '__main__':
+    run_test()
