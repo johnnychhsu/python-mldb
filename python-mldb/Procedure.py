@@ -15,7 +15,7 @@ class Procedure(object):
     def show_progress(self):
         pass
 
-    def train(self, model_name, model_type):
+    def train(self, model_name, model_type, dataset):
         pass
 
 
