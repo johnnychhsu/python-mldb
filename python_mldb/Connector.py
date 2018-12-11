@@ -6,6 +6,7 @@
 
 import mysql.connector
 from mysql.connector import errorcode
+from mysql.connector.constants import ClientFlag
 
 
 class Connector(object):
@@ -32,12 +33,15 @@ class Connector(object):
                 host=self.host,
                 user=self.user,
                 passwd=self.password,
-                auth_plugin='mysql_native_password'
+                auth_plugin='mysql_native_password',
+                client_flags=[ClientFlag.LOCAL_FILES]
             )
 
             self.cursor = self.mydb.cursor()
 
             print ("Connection established.")
+
+            return True
 
         except mysql.connector.Error as err:
             if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
