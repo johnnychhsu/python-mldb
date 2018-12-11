@@ -21,6 +21,7 @@ def test_dealer():
 
 def run_test():
     test_connector()
+    test_dealer()
 
 
 if __name__ == '__main__':
