@@ -1,8 +1,8 @@
 # @Author: Johnny Hsu
-# @Date: 2018-12-09
+# @Date: 2018-12-11
 # @Last Modified by:   Johnny Hsu
-# @Last Modified time: 2018-12-09
-# @File Name:          __init__.py
+# @Last Modified time: 2018-12-11
+# @File Name:          Connector.py
 
 import mysql.connector
 from mysql.connector import errorcode
