@@ -1,7 +1,7 @@
 # @Author: Johnny Hsu
 # @Date: 2018-12-09
 # @Last Modified by:   Johnny Hsu
-# @Last Modified time: 2018-12-09
+# @Last Modified time: 2018-12-11
 # @File Name:          query_handler.py
 
 
@@ -12,8 +12,14 @@ class QueryHandler(object):
         self.cursor = cursor
 
     def run_query(self, query):
-        pass
+        try:
+            self.cursor.execute(query)
+        except mysql.connector.Error as err:
+            self._error_handler(err)
+        else:
+            print ("Query Done.")
 
-    def _error_handler(self, err):
-        pass
+    @staticmethod
+    def _error_handler(err):
+        print("Failed : {}".format(err))
 
