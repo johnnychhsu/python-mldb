@@ -12,8 +12,17 @@ class QueryHandler(object):
         self.cursor = cursor
 
     def run_query(self, query):
-        pass
+        try:
+            self.cursor.execute(query)
+        except mysql.connector.Error as err:
+            self._error_handler(err)
+        else:
+            print ("Query Done.")
 
-    def _error_handler(self, err):
-        pass
+    def commit_query(self):
+        self.cursor.commit()
+
+    @staticmethod
+    def _error_handler(err):
+        print("Failed : {}".format(err))
 
