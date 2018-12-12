@@ -25,7 +25,7 @@ class Connector(object):
         if self.cursor:
             self.cursor.close()
 
-        print ("Connection finished.")
+        print("Connection finished.")
 
     def connect(self):
         try:
@@ -40,7 +40,7 @@ class Connector(object):
 
             self.cursor = self.mydb.cursor()
 
-            print ("Connection established.")
+            print("Connection established.")
 
             return True
 

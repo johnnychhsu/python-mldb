@@ -30,13 +30,13 @@ class Dealer(object):
         if self._check_db_not_existed(config['database']):
             self._create_database(config['database'])
         else:
-            print ("Warning: Database {} already existed!".format(config['database']))
+            print("Warning: Database {} already existed!".format(config['database']))
 
         self.dataset = Dataset(self.query_handler)
         self.procedure = Procedure(self.query_handler, self.dataset)
         self.function = Function(self.query_handler, self.dataset)
 
-        print ("Dealer established, service start!")
+        print("Dealer established, service start!")
 
     def _create_database(self, name):
         query = "CREATE DATABASE {}".format(name)
