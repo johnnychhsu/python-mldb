@@ -3,7 +3,7 @@
 # @Last Modified by:   Johnny Hsu
 # @Last Modified time: 2018-12-09
 # @File Name:          Procedure.py
-
+from sklearn.ensemble import RandomForestClassifier
 
 
 class Procedure(object):
@@ -39,5 +39,5 @@ class RFClassifierProcedure(ClassifierProcedure):
     def train(self, dataset):
         self._train(dataset)
 
-    def _train(self):
+    def _train(self, dataset):
         pass
