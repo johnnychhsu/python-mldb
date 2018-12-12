@@ -15,13 +15,24 @@ class Procedure(object):
     def show_progress(self):
         pass
 
-    def train(self, model_name, model_type, dataset):
+    def save_to_db(self):
         pass
 
 
 class ClassifierProcedure(Procedure):
 
-    def __init__(self):
-        super(ClassifierProcedure, self).__init__(Procedure)
+    def __init__(self, name):
+        super(ClassifierProcedure, self).__init__()
+        self.name = name
+
+    def train(self, model_name, model_type, dataset):
+        pass
 
 
+class RFClassifierProcedure(ClassifierProcedure):
+
+    def __init__(self, name):
+        super(RFClassifierProcedure, self).__init__(name)
+
+    def train(self, model_name, model_type, dataset):
+        pass
