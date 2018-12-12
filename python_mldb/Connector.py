@@ -1,11 +1,12 @@
 # @Author: Johnny Hsu
-# @Date: 2018-12-09
+# @Date: 2018-12-11
 # @Last Modified by:   Johnny Hsu
-# @Last Modified time: 2018-12-09
-# @File Name:          __init__.py
+# @Last Modified time: 2018-12-11
+# @File Name:          Connector.py
 
 import mysql.connector
 from mysql.connector import errorcode
+from mysql.connector.constants import ClientFlag
 
 
 class Connector(object):
@@ -19,18 +20,29 @@ class Connector(object):
         self.db_list = []
 
     def __del__(self):
-        self.cursor.close()
-        self.mydb.close()
+        if self.mydb:
+            self.mydb.close()
+        if self.cursor:
+            self.cursor.close()
+
+        print ("Connection finished.")
 
     def connect(self):
         try:
             self.mydb = mysql.connector.connect(
                 host=self.host,
                 user=self.user,
-                passwd=self.password
+                passwd=self.password,
+                auth_plugin='mysql_native_password',
+                client_flags=[ClientFlag.LOCAL_FILES]
             )
+            self.mydb.autocommit = True
 
             self.cursor = self.mydb.cursor()
+
+            print ("Connection established.")
+
+            return True
 
         except mysql.connector.Error as err:
             if err.errno == errorcode.ER_ACCESS_DENIED_ERROR:
@@ -39,13 +51,4 @@ class Connector(object):
                 print("Database does not exist")
             else:
                 print(err)
-
-    def show_database(self):
-        pass
-
-    def choose_database(self, db_name):
-
-        self.mydb.database = db_name
-
-
 
