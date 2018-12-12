@@ -54,5 +54,5 @@ class RFClassifierProcedure(ClassifierProcedure):
 
         self._save_to_db(clf)
 
-    def _save_to_db(self):
+    def _save_to_db(self, clf):
         pass
