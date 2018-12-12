@@ -4,6 +4,9 @@ from utils import _load_config
 
 
 def test_connector():
+
+    print ("Connector test start ...")
+
     config = _load_config()
 
     connector = Connector(config['password'])
@@ -16,6 +19,9 @@ def test_connector():
 
 
 def test_dealer():
+
+    print ("Dealer test start ...")
+
     dealer = Dealer()
 
 

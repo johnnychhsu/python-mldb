@@ -18,8 +18,13 @@ class QueryHandler(object):
             self._error_handler(err)
         else:
             print ("Query: {} done.".format(query))
+            return self._db_result()
 
     @staticmethod
     def _error_handler(err):
         print("Failed : {}".format(err))
 
+    def _db_result(self):
+        # item is tuple
+        for item in self.cursor:
+            yield item

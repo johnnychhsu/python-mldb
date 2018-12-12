@@ -26,7 +26,11 @@ class Dealer(object):
 
         self.connector.connect()
         self.query_handler = QueryHandler(self.connector.mydb, self.connector.cursor)
-        self._create_database(config['database'])
+
+        if self._check_db_not_existed(config['database']):
+            self._create_database(config['database'])
+        else:
+            print ("Warning: Database {} already existed!".format(config['database']))
 
         self.dataset = Dataset(self.query_handler)
         self.procedure = Procedure(self.query_handler, self.dataset)
@@ -37,3 +41,11 @@ class Dealer(object):
     def _create_database(self, name):
         query = "CREATE DATABASE {}".format(name)
         self.query_handler.run_query(query)
+
+    def _check_db_not_existed(self, name):
+        query = "SHOW DATABASES;"
+        _result = self.query_handler.run_query(query)
+        for db in _result:
+            if name in db:
+                return False
+        return True
