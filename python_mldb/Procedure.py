@@ -5,6 +5,7 @@
 # @File Name:          Procedure.py
 
 
+
 class Procedure(object):
 
     def __init__(self, query_handler, dataset):
@@ -21,11 +22,12 @@ class Procedure(object):
 
 class ClassifierProcedure(Procedure):
 
-    def __init__(self, name):
+    def __init__(self, name, description):
         super(ClassifierProcedure, self).__init__()
         self.name = name
+        self.description = description
 
-    def train(self, model_name, model_type, dataset):
+    def train(self, dataset):
         pass
 
 
@@ -34,5 +36,8 @@ class RFClassifierProcedure(ClassifierProcedure):
     def __init__(self, name):
         super(RFClassifierProcedure, self).__init__(name)
 
-    def train(self, model_name, model_type, dataset):
+    def train(self, dataset):
+        self._train(dataset)
+
+    def _train(self):
         pass
