@@ -3,6 +3,7 @@
 # @Last Modified by:   Johnny Hsu
 # @Last Modified time: 2018-12-11
 # @File Name:          query_handler.py
+import mysql.connector
 
 
 class QueryHandler(object):

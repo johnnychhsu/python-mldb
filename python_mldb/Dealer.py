@@ -13,9 +13,9 @@ from python_mldb.utils import _load_config
 
 class Dealer(object):
 
-    def __init__(self):
+    def __init__(self, config_file):
 
-        config = _load_config()
+        config = _load_config(config_file)
         host = config['host']
         user = config['name']
         password = config['password']
