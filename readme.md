@@ -30,4 +30,5 @@ to check whether the install is OK.
 
 #### Example
 We provide ipython notebook for you to quick start using python-mldb.
-[Random Forest Classifier](http://example.com/ "Title") inline link
+Please check the following links :
+1. [Random Forest Classifier](https://github.com/johnnychhsu/python-mldb/blob/master/Example/mldb_example.ipynb)
