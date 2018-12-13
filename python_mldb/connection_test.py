@@ -22,7 +22,7 @@ def test_dealer():
 
     print ("Dealer test start ...")
 
-    dealer = Dealer()
+    dealer = Dealer('config_file/config.yaml')
 
 
 def run_test():
