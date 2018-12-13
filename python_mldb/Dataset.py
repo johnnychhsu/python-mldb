@@ -9,7 +9,6 @@ import pandas as pd
 import numpy as np
 
 
-
 class Dataset(object):
     def __init__(self, query_handler):
         self.query_handler = query_handler
