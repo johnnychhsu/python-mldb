@@ -15,6 +15,11 @@ def _create_database(query_handler, name):
     query_handler.run_query(query)
 
 
+def _use_database(query_handler, db_name):
+    query = "USE {}".format(db_name)
+    query_handler.run_query(query)
+
+
 def _check_db_not_existed(query_handler, name):
     query = "SHOW DATABASES;"
     _result = query_handler.run_query(query)
