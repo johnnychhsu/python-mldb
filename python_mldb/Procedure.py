@@ -35,6 +35,7 @@ class RFClassifierProcedure(ClassifierProcedure):
 
     def __init__(self, name, description):
         super(RFClassifierProcedure, self).__init__(name, description)
+        self.table_name = 'RF_Model'
 
     def train(self, dataset_name, **kwargs):
         self._train(dataset_name)
