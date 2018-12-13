@@ -11,11 +11,12 @@ def _load_config(config_file):
 
 
 def _create_database(query_handler, name):
-    query = "CREATE DATABASE {}".format(name)
+    query = "CREATE DATABASE {};".format(name)
     query_handler.run_query(query)
 
 
 def _use_database(query_handler, db_name):
+    _ = query_handler.cursor.fetchall()
     query = "USE {}".format(db_name)
     query_handler.run_query(query)
 

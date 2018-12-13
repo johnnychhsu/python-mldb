@@ -29,10 +29,10 @@ class Dealer(object):
 
         if _check_db_not_existed(self.query_handler, config['database']):
             _create_database(self.query_handler, config['database'])
-            _use_database(self.query_handler, config['database'])
         else:
             print ("Warning: Database {} already existed!".format(config['database']))
-            _use_database(self.query_handler, config['database'])
+
+        _use_database(self.query_handler, config['database'])
 
         self.dataset = Dataset(self.query_handler)
         self.procedure = Procedure(self.query_handler, self.dataset)
