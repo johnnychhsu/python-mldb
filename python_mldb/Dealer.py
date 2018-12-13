@@ -3,12 +3,12 @@
 # @Last Modified by:   Johnny Hsu
 # @Last Modified time: 2018-12-12
 # @File Name:          Dealer.py
-from Connector import Connector
-from Dataset import Dataset
-from Procedure import Procedure
-from Function import Function
-from query_handler import QueryHandler
-from utils import _load_config
+from python_mldb.Connector import Connector
+from python_mldb.Dataset import Dataset
+from python_mldb.Procedure import Procedure
+from python_mldb.Function import Function
+from python_mldb.query_handler import QueryHandler
+from python_mldb.utils import _load_config
 
 
 class Dealer(object):
