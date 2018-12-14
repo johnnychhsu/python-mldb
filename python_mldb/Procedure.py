@@ -54,6 +54,7 @@ class RFClassifierProcedure(ClassifierProcedure):
         clf = RandomForestClassifier(n_estimators=100,
                                      max_depth=2,
                                      random_state=0,
+                                     verbose=1,
                                      **kwargs)
 
         print("Start training random forest classifier with dataset {}.".format(data_table_name))
@@ -77,11 +78,16 @@ class RFClassifierProcedure(ClassifierProcedure):
             pickle.dump(clf, f)
 
         current_time = current_time.replace("T", ' ')
-        _row_values = self.model_name + ',' + current_time + ',' + data_table_name + ',' + saved_model_path
 
-        query = "INSERT INTO {} VALUES ({})".format(self.table_name, _row_values)
+        query = "INSERT INTO {} VALUES ('{}','{}','{}','{}')".format(self.table_name,
+                                                                     self.model_name,
+                                                                     current_time,
+                                                                     data_table_name,
+                                                                     saved_model_path)
         self.query_handler.flush_cursor()
         self.query_handler.run_query(query)
 
-        print("Trained model is saved in database {}, table {}".format(self.query_handler.connector.database, self.table_name))
+        print(query)
+
+        print("Trained model is saved in database {}, table {}.".format(self.query_handler.connector.database, self.table_name))
 
