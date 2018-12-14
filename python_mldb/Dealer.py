@@ -19,6 +19,7 @@ class Dealer(object):
         host = config['host']
         user = config['name']
         password = config['password']
+        database = config['database']
 
         self.connector = Connector(user=user,
                                    host=host,
@@ -27,15 +28,15 @@ class Dealer(object):
         self.connector.connect()
         self.query_handler = QueryHandler(self.connector.mydb, self.connector.cursor)
 
-        if _check_db_not_existed(self.query_handler, config['database']):
-            _create_database(self.query_handler, config['database'])
+        if _check_db_not_existed(self.query_handler, database):
+            _create_database(self.query_handler, database)
         else:
-            print ("Warning: Database {} already existed!".format(config['database']))
+            print ("Warning: Database {} already existed!".format(database))
 
-        _use_database(self.query_handler, config['database'])
+        _use_database(self.query_handler, database)
 
         self.dataset = Dataset(self.query_handler)
-        self.procedure = Procedure(self.query_handler, self.dataset)
+        self.procedure_dict = {}
         self.function = Function(self.query_handler, self.dataset)
 
         print ("Dealer established, service start!")
