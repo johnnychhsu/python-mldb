@@ -18,8 +18,14 @@ class QueryHandler(object):
         except mysql.connector.Error as err:
             self._error_handler(err)
         else:
-            print ("Query: {} done.".format(query))
+            print("Query: {} done.".format(query))
             return self._db_result()
+
+    def flush_cursor(self):
+        try:
+            self.cursor.fetchall()
+        except mysql.connector.Error as err:
+            print("Warning: cursor is empty!")
 
     @staticmethod
     def _error_handler(err):
