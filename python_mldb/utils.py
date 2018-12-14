@@ -15,8 +15,8 @@ def _create_database(query_handler, name):
     query_handler.run_query(query)
 
 
-def _use_database(query_handler, db_name):
-    _ = query_handler.cursor.fetchall()
+def _use_database(query_handler, db_name):  
+    query_handler.flush_cursor()
     query = "USE {}".format(db_name)
     query_handler.run_query(query)
 
