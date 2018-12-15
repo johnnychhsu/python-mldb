@@ -5,3 +5,4 @@ data/
 __pycache__/
 python_mldb.egg-info/
 *.pickle
+.DS_Store

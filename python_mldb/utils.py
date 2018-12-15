@@ -32,7 +32,7 @@ def _check_db_not_existed(query_handler, name):
 
 
 def _create_model_table(query_handler, table_name):
-    values = '(name VARCHAR(25), savetime DATETIME, dataset VARCHAR(25), model_path VARCHAR(100), ' + \
+    values = '(name VARCHAR(25), savetime DATETIME, dataset VARCHAR(25), model_path VARCHAR(250), ' + \
              'CONSTRAINT PK Primary Key (name, savetime, dataset))'
     query = "CREATE TABLE {} {}".format(table_name, values)
     query_handler.run_query(query)
