@@ -23,13 +23,13 @@ class Function(object):
 
 class ClassifierFunction(Function):
 
-    def __init__(self):
-        super(ClassifierFunction, self).__init__(Function)
+    def __init__(self, query_handler, dataset):
+        super(ClassifierFunction, self).__init__(query_handler, dataset)
 
 class RFClassifierFunction(ClassifierFunction):
 
     def __init__(self, query_handler, dataset):
-        super(ClassifierFunction, self).__init__(query_handler, dataset))
+        super(RFClassifierFunction, self).__init__(query_handler, dataset)
         self.table_name = 'RF_Model'
 
     def show_model(self):
@@ -39,11 +39,11 @@ class RFClassifierFunction(ClassifierFunction):
         if _check_table_not_exist(self.query_handler, self.table_name):
             print("Table not exists!")
         else:
-            query = "SELECT * FROM {}".format(self.table_name)
+            query = "SELECT * FROM {} WHERE model".format(self.table_name)
             self.query_handler.flush_cursor()
             self.query_handler.run_query(query)
         print(query)
-        
+
     def reference(self, model_name, model_type):
         
         pass
