@@ -39,7 +39,7 @@ class RFClassifierFunction(ClassifierFunction):
         if _check_table_not_exist(self.query_handler, self.table_name):
             print("Table not exists!")
         else:
-            query = "SELECT * FROM {} WHERE model".format(self.table_name)
+            query = "SELECT * FROM {}".format(self.table_name)
             self.query_handler.flush_cursor()
             self.query_handler.run_query(query)
         print(query)
