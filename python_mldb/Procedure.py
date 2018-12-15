@@ -10,6 +10,7 @@ import numpy as np
 import os
 import pickle
 
+
 class Procedure(object):
 
     def __init__(self, query_handler, dataset):
