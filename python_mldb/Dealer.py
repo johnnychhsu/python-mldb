@@ -37,6 +37,6 @@ class Dealer(object):
 
         self.dataset = Dataset(self.query_handler)
         self.procedure_dict = {}
-        self.function = Function(self.query_handler, self.dataset)
+        self.function_dict = {}
 
         print ("Dealer established, service start!")
