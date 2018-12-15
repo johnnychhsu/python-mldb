@@ -1,10 +1,10 @@
-### python-mldb
+## python-mldb
 
-#### Introduction
+### Introduction
 python-mldb is an interface for you to combine machine learning development with SQL database.
 You can utilize the advantage of SQL database while develop your machine learning application.
 
-#### Install
+### Install
 We currently support Python3 only.
 
 First clone or download this repo by
@@ -28,7 +28,21 @@ python connection_test.py
 ```
 to check whether the install is OK.
 
-#### Example
+### Trouble shooting
+If you encounter MySQL error like
+```sql
+This command is not allowed
+```
+This is due to the local infile security issue MySQL address.
+This can be solved by running the command in mysqlsh :  
+```mysql-sql
+SHOW GLOBAL VARIABLES LIKE 'local_infile';
+SET GLOBAL local_infile = 'ON';
+SHOW GLOBAL VARIABLES LIKE 'local_infile';
+```
+
+
+### Example
 We provide ipython notebook for you to quick start using python-mldb.
 Please check the following links :
 1. [Random Forest Classifier](https://github.com/johnnychhsu/python-mldb/blob/master/Example/mldb_example.ipynb)
