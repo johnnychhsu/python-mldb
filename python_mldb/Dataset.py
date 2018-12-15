@@ -11,7 +11,7 @@ import numpy as np
 
 class Dataset(object):
     def __init__(self, query_handler):
-        self.query_handler = query_handler
+        self.query_handler = query_handler  
 
     def save_to_database(self, csv_file, table_name):
         data = pd.read_csv(csv_file, nrows=2)
@@ -32,10 +32,10 @@ class Dataset(object):
         sql_query = sql_query[:-1]
         sql_query += ")"
         self.query_handler.run_query(sql_query)
-        load_query = "LOAD DATA LOCAL INFILE '" + csv_file + "' INTO TABLE "
-        + table_name
-        load_query += " FIELDS TERMINATED BY ',' LINES TERMINATED BY '\n'"
-        + "IGNORE 1 LINES"
+        load_query = ("LOAD DATA LOCAL INFILE '" + csv_file + "' INTO TABLE "
+                      + table_name)
+        load_query += (" FIELDS TERMINATED BY ',' ENCLOSED BY '\"' "
+                       + "LINES TERMINATED BY '\n' IGNORE 1 LINES")
         self.query_handler.run_query(load_query)
 
     def load_from_database(self, name):

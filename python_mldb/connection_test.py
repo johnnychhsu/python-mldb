@@ -1,13 +1,17 @@
-from Connector import Connector
-from Dealer import Dealer
-from utils import _load_config
+from python_mldb.Connector import Connector
+from python_mldb.Dealer import Dealer
+from python_mldb.utils import _load_config
+
+import os
 
 
 def test_connector():
 
     print ("Connector test start ...")
 
-    config = _load_config()
+    path = os.path.abspath('./')
+
+    config = _load_config(os.path.join(path, 'config_file/config.yaml'))
 
     connector = Connector(config['password'])
     flag = connector.connect()
@@ -22,7 +26,7 @@ def test_dealer():
 
     print ("Dealer test start ...")
 
-    dealer = Dealer()
+    dealer = Dealer('config_file/config.yaml')
 
 
 def run_test():
