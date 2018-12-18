@@ -16,7 +16,7 @@ class Dataset(object):
 
     def save_to_database(self, csv_file, table_name):
         if not _check_table_not_exist(self.query_handler, table_name):
-            print("Warning: Table {} already existed!.".format(table_name))
+            print("Warning: Table {} already existed!".format(table_name))
             self.query_handler.flush_cursor()
             return
         data = pd.read_csv(csv_file, nrows=2)
@@ -42,14 +42,13 @@ class Dataset(object):
                       + table_name)
         load_query += (" FIELDS TERMINATED BY ',' ENCLOSED BY '\"' "
                        + "LINES TERMINATED BY '\r\n' IGNORE 1 LINES")
-        self.query_handler.flush_cursor()
         self.query_handler.run_query(load_query)
 
     def load_from_database(self, name):
         if _check_table_not_exist(self.query_handler, name):
-            print("Warning: Table {} not exists!.".format(name))
+            print("Warning: Table {} not exists!".format(name))
+            self.query_handler.flush_cursor()
             return
-        self.query_handler.flush_cursor()
         select_query = "SHOW COLUMNS FROM " + name
         self.query_handler.flush_cursor()
         self.query_handler.run_query(select_query)
@@ -58,7 +57,6 @@ class Dataset(object):
         for item in self.query_handler.cursor:
             rows.append(item[0])
         select_query = "SELECT * FROM " + name
-        self.query_handler.flush_cursor()
         self.query_handler.run_query(select_query)
         for item in self.query_handler.cursor:
             data.append(item)
@@ -68,7 +66,7 @@ class Dataset(object):
 
     def summary(self, name):
         if _check_table_not_exist(self.query_handler, name):
-            print("Warning: Table {} not exists!.".format(name))
+            print("Warning: Table {} not exists!".format(name))
             self.query_handler.flush_cursor()
             return
         select_query = "SHOW COLUMNS FROM " + name
@@ -87,7 +85,6 @@ class Dataset(object):
             select_query = ("SELECT AVG(" + item[0] + "), "
                             + "MIN(" + item[0] + "), " + "MAX(" + item[0] + ")"
                             + ", SUM(" + item[0] + ") " + "FROM " + name)
-            self.query_handler.flush_cursor()
             self.query_handler.run_query(select_query)
             for result in self.query_handler.cursor:
                 data.append(result)
@@ -100,7 +97,7 @@ class Dataset(object):
 
     def delete_data(self, name):
         if _check_table_not_exist(self.query_handler, name):
-            print("Warning: Table {} not exists!.".format(name))
+            print("Warning: Table {} not exists!".format(name))
             self.query_handler.flush_cursor()
             return
         delete_query = "DROP TABLE {};".format(name)
