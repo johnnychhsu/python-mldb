@@ -7,13 +7,17 @@ Created on Tue Dec 11 17:07:13 2018
 """
 import pandas as pd
 import numpy as np
+from python_mldb.utils import _check_table_not_exist
 
 
 class Dataset(object):
     def __init__(self, query_handler):
-        self.query_handler = query_handler  
+        self.query_handler = query_handler
 
     def save_to_database(self, csv_file, table_name):
+        if not _check_table_not_exist(self.query_handler, table_name):
+            print("Warning: Table {} already existed!.".format(table_name))
+            return
         data = pd.read_csv(csv_file, nrows=2)
         col_name = []
         col_type = []
@@ -35,10 +39,13 @@ class Dataset(object):
         load_query = ("LOAD DATA LOCAL INFILE '" + csv_file + "' INTO TABLE "
                       + table_name)
         load_query += (" FIELDS TERMINATED BY ',' ENCLOSED BY '\"' "
-                       + "LINES TERMINATED BY '\n' IGNORE 1 LINES")
+                       + "LINES TERMINATED BY '\r\n' IGNORE 1 LINES")
         self.query_handler.run_query(load_query)
 
     def load_from_database(self, name):
+        if _check_table_not_exist(self.query_handler, name):
+            print("Warning: Table {} not exists!.".format(name))
+            return
         select_query = "SHOW COLUMNS FROM " + name
         self.query_handler.run_query(select_query)
         rows = []
@@ -78,6 +85,13 @@ class Dataset(object):
         result = np.hstack((col_name, data))
         columns = ['Column', 'AVG', 'MIN', 'MAX', 'SUM']
         return pd.DataFrame(result, columns=columns)
+
+    def delete_data(self, name):
+        if _check_table_not_exist(self.query_handler, name):
+            print("Warning: Table {} not exists!.".format(name))
+            return
+        delete_query = "DROP TABLE {}".format(name)
+        self.query_handler.run_query(delete_query)
 
     def get_data(self):
         pass
