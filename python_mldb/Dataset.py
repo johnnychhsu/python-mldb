@@ -16,6 +16,7 @@ class Dataset(object):
 
     def save_to_database(self, csv_file, table_name):
         if not _check_table_not_exist(self.query_handler, table_name):
+            self.query_handler.flush_cursor()
             print("Warning: Table {} already existed!.".format(table_name))
             return
         data = pd.read_csv(csv_file, nrows=2)
@@ -44,6 +45,7 @@ class Dataset(object):
 
     def load_from_database(self, name):
         if _check_table_not_exist(self.query_handler, name):
+            self.query_handler.flush_cursor()
             print("Warning: Table {} not exists!.".format(name))
             return
         select_query = "SHOW COLUMNS FROM " + name
@@ -88,6 +90,7 @@ class Dataset(object):
 
     def delete_data(self, name):
         if _check_table_not_exist(self.query_handler, name):
+            self.query_handler.flush_cursor()
             print("Warning: Table {} not exists!.".format(name))
             return
         delete_query = "DROP TABLE {}".format(name)
