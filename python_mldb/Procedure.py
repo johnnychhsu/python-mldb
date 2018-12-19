@@ -97,12 +97,21 @@ class RFClassifierProcedure(ClassifierProcedure):
 
 class CustomizedClassifierProcedure(ClassifierProcedure):
 
-    def __init__(self, query_handler, dataset, model_name, model_object):
+    def __init__(self, query_handler, dataset, model_name, model_object, train_op, save_op):
         super(CustomizedClassifierProcedure, self).__init__(query_handler, dataset, model_name)
         self.model_object = model_object
+        self.train_op = train_op
+        self.save_op = save_op
 
     def train(self, dataset_name, label_col, feature_col, saved_model_path=''):
-        pass
+        self._train(dataset_name, label_col, feature_col, saved_model_path='')
+
+    def _train(self, dataset_name, label_col, feature_col, saved_model_path=''):
+        data = self.dataset.load_from_database(data_table_name)
+        y = data[label_col].values
+        x = data[feature_col].values
+
+        y = np.ravel(y)
 
     def _save_to_db(self, mode_object, data_table_name):
         pass
