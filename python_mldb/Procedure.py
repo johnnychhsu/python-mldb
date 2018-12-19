@@ -92,6 +92,7 @@ class RFClassifierProcedure(ClassifierProcedure):
 
         print("Trained model is saved in database {}, table {}.".format(self.query_handler.connector.database, self.table_name))
 
+
 class SVClassifierProcedure(ClassifierProcedure):
 
     def __init__(self, query_handler, dataset, model_name):
@@ -108,9 +109,7 @@ class SVClassifierProcedure(ClassifierProcedure):
 
         y = np.ravel(y)
 
-        clf = SVC(  gamma=2,
-                    C=1,
-                    **kwargs)
+        clf = SVC(gamma=2, C=1, **kwargs)
 
         print("Start training RBF SVM classifier with dataset {}.".format(data_table_name))
         clf.fit(x, y)

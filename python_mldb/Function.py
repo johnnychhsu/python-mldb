@@ -47,7 +47,7 @@ class RFClassifierFunction(ClassifierFunction):
             self.query_handler.flush_cursor()
             _result = self.query_handler.run_query(query)
             for result in _result:
-                print (result)
+                print(result)
 
     def reference(self, model_name, time, data_table_name, test_data_table, feature_col):
         if _check_table_not_exist(self.query_handler, self.table_name):
@@ -76,7 +76,8 @@ class RFClassifierFunction(ClassifierFunction):
             test_data = self.dataset.load_from_database(test_data_table)
             test_feature = test_data[feature_col].values
             _ans = clf.predict(test_feature)
-            print (_ans)
+            print(_ans)
+
 
 class SVClassifierFunction(ClassifierFunction):
 
@@ -94,8 +95,8 @@ class SVClassifierFunction(ClassifierFunction):
             query = "SELECT * FROM {}".format(self.table_name)
             self.query_handler.flush_cursor()
             _result = self.query_handler.run_query(query)
-            for reulst in _result:
-                print (reulst)
+            for result in _result:
+                print(result)
 
     def reference(self, model_name, time, data_table_name, test_data_table, feature_col):
         if _check_table_not_exist(self.query_handler, self.table_name):
@@ -124,5 +125,5 @@ class SVClassifierFunction(ClassifierFunction):
             test_data = self.dataset.load_from_database(test_data_table)
             test_feature = test_data[feature_col].values
             _ans = clf.predict(test_feature)
-            print (_ans)
+            print(_ans)
 
