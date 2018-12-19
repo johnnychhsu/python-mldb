@@ -34,6 +34,9 @@ class ClassifierProcedure(Procedure):
     def train(self, dataset_name, label_col, feature_col, saved_model_path):
         pass
 
+    def _save_to_db(self, mode_object, data_table_name):
+        pass
+
 
 class RFClassifierProcedure(ClassifierProcedure):
 
@@ -91,3 +94,15 @@ class RFClassifierProcedure(ClassifierProcedure):
 
         print("Trained model is saved in database {}, table {}.".format(self.query_handler.connector.database, self.table_name))
 
+
+class CustomizedClassifierProcedure(ClassifierProcedure):
+
+    def __init__(self, query_handler, dataset, model_name, model_object):
+        super(CustomizedClassifierProcedure, self).__init__(query_handler, dataset, model_name)
+        self.model_object = model_object
+
+    def train(self, dataset_name, label_col, feature_col, saved_model_path=''):
+        pass
+
+    def _save_to_db(self, mode_object, data_table_name):
+        pass
