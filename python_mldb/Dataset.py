@@ -42,7 +42,9 @@ class Dataset(object):
                       + table_name)
         load_query += (" FIELDS TERMINATED BY ',' ENCLOSED BY '\"' "
                        + "LINES TERMINATED BY '\r\n' IGNORE 1 LINES")
-        self.query_handler.run_query(load_query)
+        result = self.query_handler.run_query(load_query)          
+        if result is False:
+            self.delete_data(table_name)
 
     def load_from_database(self, name):
         if _check_table_not_exist(self.query_handler, name):

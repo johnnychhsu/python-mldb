@@ -17,6 +17,7 @@ class QueryHandler(object):
             self.cursor.execute(query)
         except mysql.connector.Error as err:
             self._error_handler(err)
+            return False
         else:
             print("Query: {} done.".format(query))
             return self._db_result()
