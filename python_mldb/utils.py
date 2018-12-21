@@ -40,6 +40,7 @@ def _create_model_table(query_handler, table_name):
 
 def _check_table_not_exist(query_handler, table_name):
     query = "SHOW TABLES;"
+    query_handler.flush_cursor()
     _result = query_handler.run_query(query)
     for table in _result:
         if table_name in table:
