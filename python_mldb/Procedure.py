@@ -151,7 +151,7 @@ class SVClassifierProcedure(ClassifierProcedure):
 
 class CustomizedClassifierProcedure(ClassifierProcedure):
 
-    def __init__(self, query_handler, dataset, model_name, model_table_name, model_object, train_op , save_op):
+    def __init__(self, query_handler, dataset, model_name, model_table_name, model_object, train_op, save_op):
         super(CustomizedClassifierProcedure, self).__init__(query_handler, dataset, model_name)
         self.table_name = model_table_name
         self.model_object = model_object
