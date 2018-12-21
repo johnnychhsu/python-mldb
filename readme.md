@@ -46,3 +46,4 @@ SHOW GLOBAL VARIABLES LIKE 'local_infile';
 We provide ipython notebook for you to quick start using python-mldb.
 Please check the following links :
 1. [Random Forest Classifier](https://github.com/johnnychhsu/python-mldb/blob/master/Example/RF_model_example.ipynb)
+2. [Add customized model into python-mldb pipeline](https://github.com/johnnychhsu/python-mldb/blob/master/Example/customized_model_example.ipynb)
