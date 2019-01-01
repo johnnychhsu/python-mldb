@@ -193,11 +193,14 @@ class CustomizedClassifierProcedure(ClassifierProcedure):
         root_path = os.path.abspath('./../saved_model/')
         saved_model_path = os.path.join(root_path, saved_model_name)
 
+        model_bytes = 'NULL'
+        
         # sklearn model needs pickle, so we have to check here
         if self.save_op == 'pickle':
-            saved_model_path += '.pickle'
-            with open(saved_model_path, 'wb') as f:
-                pickle.dump(self.model_object, f)
+            model_bytes = pickle.dump(self.model_object)
+            # saved_model_path += '.pickle'
+            # with open(saved_model_path, 'wb') as f:
+                # pickle.dump(self.model_object, f)
         else:
             try:
                 saved_model_path += '.h5'
@@ -208,11 +211,12 @@ class CustomizedClassifierProcedure(ClassifierProcedure):
 
         current_time = current_time.replace("T", ' ')
 
-        query = "INSERT INTO {} VALUES ('{}','{}','{}','{}')".format(self.table_name,
+        query = "INSERT INTO {} VALUES ('{}','{}','{}','{}','{}')".format(self.table_name,
                                                                      self.model_name,
                                                                      current_time,
                                                                      data_table_name,
-                                                                     saved_model_path)
+                                                                     saved_model_path,
+                                                                     model_bytes)
         self.query_handler.flush_cursor()
         self.query_handler.run_query(query)
 
