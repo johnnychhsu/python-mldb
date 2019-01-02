@@ -53,7 +53,7 @@ class RFClassifierFunction(ClassifierFunction):
         if _check_table_not_exist(self.query_handler, self.table_name):
             print("Table not exists!")
         else:
-            query_1 = "SELECT model_path FROM {} WHERE name='{}' "
+            query_1 = "SELECT model FROM {} WHERE name='{}' "
             query_2 = "AND savetime='{}' AND dataset='{}'"
             query = query_1 + query_2
             query = query.format(self.table_name, model_name, time, data_table_name)
@@ -61,14 +61,14 @@ class RFClassifierFunction(ClassifierFunction):
             self.query_handler.flush_cursor()
             _db_result = self.query_handler.run_query(query)
 
-            _model_path = ''
+            _model_bytes = ""
             # The return result is tuple
             for result in _db_result:
-                _model_path = result[0]
+                _model_bytes = result[0]
 
             try:
-                with open(_model_path, 'rb') as f:
-                    clf = pickle.load(f)
+                # with open(_model_path, 'rb') as f:
+                clf = pickle.loads(_model_bytes.encode())
             except IOError as err:
                 print('IOError({}): {}'.format(err.errno, err.strerror))
                 return
